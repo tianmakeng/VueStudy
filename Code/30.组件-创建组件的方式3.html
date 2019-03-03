@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <mycom></mycom>
+    </div>
+
+    <div id="appw">
+        <mycom></mycom>
+        <login></login>
+    </div>
+
+    <!-- 在被控制 #app 外面，使用 template 元素定义组件的 HTML 模板结构 -->
+    <template id="tmpl">
+        <div>
+            <h1>这是通过 template 元素在外部定义的组件结构，这个方式，有代码的只能提示和高亮</h1>
+            <h4>2233</h4>
+        </div>
+    </template>
+    <script>
+        Vue.component('mycom', {
+            template: '#tmpl'
+        })
+
+        var vm = new Vue({
+            el: '#app',
+            data: {
+
+            },
+            methods: {
+
+            }
+        });
+
+        var vm2 = new Vue({
+            el: '#appw',
+            data: {
+
+            },
+            methods: {
+
+            },
+            filters: {
+
+            },
+            directives: {
+
+            },
+            components: {
+                // 定义实例内部私有组件
+                login: {
+                    template: '<h1>这是私有 login 组件</h1>'
+                }
+            },
+
+            beforeCreate() {
+
+            },
+            created() {
+
+            },
+            beforeMount() {
+
+            },
+            updated() {
+
+            },
+            beforeDestroy() {
+
+            },
+            destroyed() {
+
+            },
+
+
+        });
+    </script>
+</body>
+
+</html>

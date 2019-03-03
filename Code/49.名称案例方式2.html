@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="firstname">+
+        <input type=" text " v-model="lastname">=
+        <input type="text" v-model="fullname">
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                firstname: '',
+                lastname: '',
+                fullname: '',
+            },
+            methods: {
+
+            },
+            // 使用这个属性，可以监视 data 中指定数据的变化，然后触发这个 watch 中对应的 funcion 处理函数
+            watch: {
+                firstname: function(newVal, oldVal) {
+                    // this.fullname = this.firstname + this.lastname;
+                    this.fullname = newVal + oldVal;
+                },
+                lastname: function(newVal) {
+                    this.fullname = this.firstname + newVal;
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

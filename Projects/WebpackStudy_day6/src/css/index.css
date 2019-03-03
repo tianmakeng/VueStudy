@@ -1,0 +1,9 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: cyan;
+    /* 默认情况下，webpack 无法处理 css 文件中的 URL 地址，不管是图片还是字体库，只要是 URL 地址都处理不了 */
+    background-image: url(../images/back.jpg);
+    background-size: cover;
+}

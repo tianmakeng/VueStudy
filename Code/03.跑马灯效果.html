@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 1. 导入 Vue 包 -->
+    <script src="lib/vue.js"></script>
+</head>
+
+<body>
+    <!-- 2. 创建一个要控制的区域 -->
+    <div id="app">
+        <input type="button" value="跑起来" @click="run">
+        <input type="button" value="停下来" @click="stop">
+        <h4>{{msg}}</h4>
+    </div>
+
+    <script>
+        // 注意：在 vm 实例中，如果想要获取 data 上的数据，或者想要调用 methods 中的方法，必须通过 this.数据属性名 或 this.方法名 来进行访问，这里的 this 就表示我们 new 出来的 vm 实例对象
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '跑马灯灯马跑跑马灯灯马跑',
+                intervalId: null //在 data 上定义定时器 ID
+            },
+            methods: {
+                run() {
+                    // var _this = this;
+                    // setInterval(function() {
+                    //     // 获取到头的第一个字符
+                    //     var start = _this.msg.substring(0, 1);
+                    //     // 获取到后面的所有字符
+                    //     var end = _this.msg.substring(1);
+                    //     // 重新拼接得到的新字符串，并赋值给 this.msg
+                    //     _this.msg = end + start;
+                    // }, 100);
+
+                    if (this.intervalId != null) {
+                        return;
+                    }
+
+                    this.intervalId = setInterval(() => {
+                        // 获取到头的第一个字符
+                        var start = this.msg.substring(0, 1);
+                        // 获取到后面的所有字符
+                        var end = this.msg.substring(1);
+                        // 重新拼接得到的新字符串，并赋值给 this.msg
+                        this.msg = end + start;
+                    }, 100);
+
+                    // 注意：vm 实例会监听自己身上 data 中所有数据的改变，只要数据一发生变化，就会自动把最新的数据，从 data 上同步到页面中去；
+                    // 好处：程序员只需要关心数据，不需要考虑如何渲染 DOM 页面
+                },
+                stop() {
+                    clearInterval(this.intervalId);
+                    // 每当清楚了定时器之后，需要重新把 intervalId 设置为 null
+                    this.intervalId = null;
+                }
+            }
+        })
+
+        // 分析： 
+        // 1. 给【跑起来】按钮绑定一个点击事件 v-on @ ；
+        // 2. 在按钮的事件处理函数中，写相关的业务逻辑代码：拿到 msg 字符串，然后调用字符串的 substring 来进行字符串的截取操作，把第一个字符截取出来，放到最后一个位置即可；
+        // 3. 为了实现点击按钮，自动截取的功能，需要把2步骤中的代码放到一个定时器中去；
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="lib/vue.js"></script>
+    <!-- 2.定义两组样式，来控制 transition 内部的元素实现动画 -->
+    <style>
+        /* v-enter 时间点 是进入之前，元素的起始状态，此时还没有开始进入 */
+        /* v-leave-to 时间的 是动画离开之后，离开的终止状态，此时，元素动画以及结束 */
+        
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(150px);
+        }
+        /* v-enter-active 入场动画的时间段 */
+        /* v-leave-active 入场动画的时间段 */
+        
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.4s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <input type="button" value="toggle" @click="flag=!flag">
+        <!-- 需求：点击按钮，让 H3 显示，再点击，让 H3 隐藏 -->
+        <!-- 1.使用 transition 元素，把需要被动画控制的元素包裹起来 -->
+        <!-- transition 是 VUE 官方提供的 -->
+        <transition>
+            <h3 v-if="flag">这是一个 H3</h3>
+        </transition>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                flag: false
+            },
+            methods: {
+
+            }
+        });
+    </script>
+</body>
+
+</html>
